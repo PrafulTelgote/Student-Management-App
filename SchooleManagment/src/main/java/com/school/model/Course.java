@@ -1,10 +1,11 @@
 package com.school.model;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
+
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class Course {
 	private Integer Duration;
 	private Integer fees;
 	
-	@ManyToMany(mappedBy = "course")
+	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Student> student=new HashSet<Student>();
 
 }

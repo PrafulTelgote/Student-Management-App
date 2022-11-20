@@ -45,11 +45,7 @@ public class Student {
 	@Embedded
 	private Address address;
 	
-	@ManyToMany
-	@JoinTable(
-			  name = "Student_Courses", 
-			  joinColumns = @JoinColumn(name = "studentid",referencedColumnName = "studentid"), 
-			  inverseJoinColumns = @JoinColumn(name = "courseid",referencedColumnName = "courseid"))
+	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "student")
 	private Set<Course> course=new HashSet<Course>();
 
 }
