@@ -77,6 +77,7 @@ public class StudentServicesImpl implements StudentServices {
              if(course.isPresent()) {
             	 Optional<Student> student=sdao.findById(current.get().getUserId());
             	 student.get().getCourse().add(course.get());
+            	 course.get().getStudent().add(student.get());
             	 sdao.save(student.get());
             	 return "Added"; 
              }
