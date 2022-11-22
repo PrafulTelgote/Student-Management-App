@@ -71,22 +71,17 @@ public class StudentServicesImpl implements StudentServices {
 	@Override
 	public String AddCourse(String uuid, Integer courseId) {
 		// TODO Auto-generated method stub
-		Optional<CurrentSession> current= currentdao.findByuuid(uuid);
-		if(current.isPresent()) {
-             Optional<Course> course=cdao.findById(courseId);
-             if(course.isPresent()) {
-            	 Optional<Student> student=sdao.findById(current.get().getUserId());
-            	 student.get().getCourse().add(course.get());
-            	 course.get().getStudent().add(student.get());
-            	 sdao.save(student.get());
-            	 return "Added"; 
-             }
-			
-		}else {
-			return "Login First";
-		}
-		
-		return null;
+		 Integer userid= currentdao.findByuuid(uuid).get().getUserId();
+		Student student=  sdao.findById(userid).get();
+		Course course=cdao.findById(courseId).get();
+		Set<Course> setcourse=student.getCourse();
+		Set<Student>setstudent=course.getStudent();
+		setcourse.add(course);
+		setstudent.add(student);
+		student.setCourse(setcourse);
+		course.setStudent(setstudent);
+		sdao.save(student);
+		return "Done";
 	}
 	
 	

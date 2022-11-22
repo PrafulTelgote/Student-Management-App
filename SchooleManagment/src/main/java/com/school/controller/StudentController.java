@@ -73,5 +73,7 @@ public class StudentController {
 		String data= loginservices.LogOut(uuid);
 		return new ResponseEntity<String>(data, HttpStatus.OK);
 	}
+	
+	
 
 }

@@ -1,8 +1,8 @@
 package com.school.model;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,13 +12,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+
+
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,6 +48,28 @@ public class Student {
 	private Address address;
 	
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "student")
+	@JsonIgnore
 	private Set<Course> course=new HashSet<Course>();
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return Objects.equals(Email, other.Email) && Objects.equals(Mobile, other.Mobile)
+				&& Objects.equals(Password, other.Password) && Objects.equals(StudentName, other.StudentName)
+				&& Objects.equals(address, other.address) && Objects.equals(studentid, other.studentid);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Email, Mobile, Password, StudentName, address, studentid);
+	}
+	
+	
 
 }
