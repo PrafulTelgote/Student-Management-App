@@ -57,7 +57,6 @@ public class StudentServicesImpl implements StudentServices {
 		// TODO Auto-generated method stub
 		Optional<CurrentSession> current= currentdao.findByuuid(uuid);
 		if(current.isPresent()) {
-//			Optional<Student> studentdata= sdao.findById(current.get().getUserId());
 			Student data= sdao.save(student);
 			return data;
 			
