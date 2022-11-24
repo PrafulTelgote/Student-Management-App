@@ -39,12 +39,11 @@ public class AdminController {
 	@Autowired
 	private LoginServices loginservices;
 	
-	@RequestMapping("/index")
-    public String home(){
-        return "index";
-    }
-	
-	
+	@GetMapping("/")
+	public String Hone() {
+		return "index";
+	}
+		
 	
 	@PostMapping("/admin/register")
 	public ResponseEntity<Admin> registerHandler(Admin admin) {
