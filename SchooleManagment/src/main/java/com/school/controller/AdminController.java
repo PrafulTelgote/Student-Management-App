@@ -40,7 +40,7 @@ public class AdminController {
 	private LoginServices loginservices;
 	
 	@GetMapping("/")
-	public String Hone() {
+	public String Home() {
 		return "index";
 	}
 		
